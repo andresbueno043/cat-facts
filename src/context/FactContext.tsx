@@ -27,8 +27,11 @@ function FactContextProvider({ children }: FactContextProviderProps) {
                 const fact: string = data.fact
                 setCatFact(fact)
 
-                const apiKey = 'TU_API_KEY' // Reemplaza con tu propia API key de Giphy
-                const searchTerm: string = encodeURIComponent(fact)
+                const apiKey = import.meta.env.VITE_API_KEY
+                const searchTerms: string[] = fact.split(' ').slice(0, 3)
+                const searchTerm: string = encodeURIComponent(
+                    searchTerms.join(' ')
+                )
 
                 const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}&limit=3`
 
