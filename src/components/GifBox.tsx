@@ -4,7 +4,7 @@ type Props = {
     gifUrl: string
 }
 
-function GiftBox({ gifUrl }: Props) {
+function GifBox({ gifUrl }: Props) {
     return (
         <div className="flex items-center justify-center rounded-md bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 w-[30%] h-[80%]">
             <div className="w-[95%] h-[94%] bg-gray-800">
@@ -14,4 +14,4 @@ function GiftBox({ gifUrl }: Props) {
     )
 }
 
-export default GiftBox
+export default GifBox
