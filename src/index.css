@@ -2,6 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+
+  background: #1f2937;
+}
+
 * {
-  background: rgb(31 41 55);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  position: relative;
+  background: white;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  padding: 10px 30px;
+  transition: 0.5s;
+  margin: 1em auto 2em;
+}
+
+a:hover {
+  letter-spacing: 0.25em;
+  background: #1e9bff;
+  color: #1e9bff;
+  box-shadow: 0 0 35px #1e9bff;
+}
+
+a::before{
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #1f2937;
+}
+
+a span{
+  position: relative;
+  z-index: 1;
+}
+
+a i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+a i::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 20px;
+  height: 4px;
+  background: #1f2937;
+  transform: translateX(-50%) skewX(325deg);
+  transition: 0.5s;
+}
+
+a:hover i::before {
+  width: 20px;
+  left: 20%;
+}
+
+a i::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 20px;
+  height: 4px;
+  background: #1f2937;
+  transform: translateX(-50%) skewX(325deg);
+  transition: 0.5s;
+}
+
+a:hover i::after {
+  width: 20px;
+  left: 80%;
 }
