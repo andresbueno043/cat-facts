@@ -7,7 +7,7 @@ function GifList() {
     const { gifs } = useContext(FactContext)
 
     return (
-        <div className="w-[80%] mx-auto h-72 mt-16 flex flex-row justify-between items-center">
+        <div className="w-[80%] mx-auto h-72 mt-6 flex flex-row justify-between items-center">
             {gifs.map((gif) => (
                 <GifBox key={gif.id} gifUrl={gif?.images.fixed_height.url} />
             ))}
