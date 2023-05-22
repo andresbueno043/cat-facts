@@ -1,24 +1,18 @@
+// FactContext.tsx
 import { useEffect, useState, createContext, ReactNode } from 'react'
-import Gif from '../@types/giphy'
+import { FactContextProps } from '../@types/context'
 
-interface FactContextProps {
-    catFact: string
-    gifs: Gif[]
-}
+// Create the FactContext
+const FactContext = createContext<FactContextProps>({
+    catFact: '',
+})
 
 interface FactContextProviderProps {
     children: ReactNode
 }
 
-// Creamos el contexto FactContext
-const FactContext = createContext<FactContextProps>({
-    catFact: '',
-    gifs: [],
-})
-
 function FactContextProvider({ children }: FactContextProviderProps) {
     const [catFact, setCatFact] = useState<string>('')
-    const [gifs, setGifs] = useState<Gif[]>([])
 
     useEffect(() => {
         fetch('https://catfact.ninja/fact')
@@ -26,37 +20,14 @@ function FactContextProvider({ children }: FactContextProviderProps) {
             .then((data) => {
                 const fact: string = data.fact
                 setCatFact(fact)
-
-                const apiKey = import.meta.env.VITE_API_KEY
-                const searchTerms: string[] = fact.split(' ').slice(0, 3)
-                const searchTerm: string = encodeURIComponent(
-                    searchTerms.join(' ')
-                )
-
-                const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}&limit=3`
-
-                fetch(url)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        const fetchedGifs: Gif[] = data.data
-                        setGifs(fetchedGifs)
-                    })
-                    .catch((error) => {
-                        console.error('Error al buscar los GIFs:', error)
-                    })
             })
             .catch((error) => {
-                console.error(
-                    'Error al obtener el dato curioso sobre gatos:',
-                    error
-                )
+                console.error('Error fetching cat fact:', error)
             })
     }, [])
 
-    const contextValue: FactContextProps = { catFact, gifs }
-
     return (
-        <FactContext.Provider value={contextValue}>
+        <FactContext.Provider value={{ catFact }}>
             {children}
         </FactContext.Provider>
     )
