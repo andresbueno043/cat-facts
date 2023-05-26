@@ -1,6 +1,14 @@
+import { useContext } from 'react'
+import { FactContext } from '../context/FactContext'
+
 function GlowingButton() {
+    const { fetchFact } = useContext(FactContext)
+
     return (
-        <div className="flex items-center justify-center">
+        <div
+            onClick={() => fetchFact()}
+            className="flex items-center justify-center"
+        >
             <a
                 href="#"
                 className="relative bg-white text-white text-uppercase text-lg font-semibold tracking-wider py-2 px-6 transition-all duration-500 ease-in-out transform hover:letter-spacing-xl hover:bg-blue-500 hover:text-blue-500 hover:shadow-lg"

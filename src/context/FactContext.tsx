@@ -5,6 +5,9 @@ import { FactContextProps } from '../@types/context'
 // Create the FactContext
 const FactContext = createContext<FactContextProps>({
     catFact: '',
+    fetchFact: () => {
+        /* fetchFact */
+    },
 })
 
 interface FactContextProviderProps {
@@ -14,7 +17,7 @@ interface FactContextProviderProps {
 function FactContextProvider({ children }: FactContextProviderProps) {
     const [catFact, setCatFact] = useState<string>('')
 
-    useEffect(() => {
+    const fetchFact = () => {
         fetch('https://catfact.ninja/fact')
             .then((response) => response.json())
             .then((data) => {
@@ -24,10 +27,14 @@ function FactContextProvider({ children }: FactContextProviderProps) {
             .catch((error) => {
                 console.error('Error fetching cat fact:', error)
             })
+    }
+
+    useEffect(() => {
+        fetchFact()
     }, [])
 
     return (
-        <FactContext.Provider value={{ catFact }}>
+        <FactContext.Provider value={{ catFact, fetchFact }}>
             {children}
         </FactContext.Provider>
     )
